@@ -6,27 +6,26 @@ using UnityEngine.UI;
 
 public class AppearBanner : MonoBehaviour
 {
-
     public Slider slTimer;
     public Movement2D movement;
     bool isArrivalEventTriggered = false;
     public float Speed;
     [SerializeField] float DownValue = 0.0f;
     [SerializeField] float Resttime = 0f;
-    public GameObject Bannerselect;
     static float enemySpeed;
     static float speedEnemySpeed;
     static float bigEnemySpeed;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject speedEnemyPrefab;
     [SerializeField] GameObject bigEnemyPrefab;
+    bool isSpeedUp = true;
 
-    Vector2 target = new Vector2(490, 382);
+    Vector2 target = new Vector2(843, 800);
 
     void Start()
     {
         movement = GetComponent<Movement2D>();
-        StartCoroutine(ChangeVariableForSeconds(10f));
+        // StartCoroutine(ChangeVariableForSeconds(10f));
         enemySpeed = enemyPrefab.GetComponent<Movement2D>().moveSpeed;
         speedEnemySpeed = speedEnemyPrefab.GetComponent<Movement2D>().moveSpeed;
         bigEnemySpeed = bigEnemyPrefab.GetComponent<Movement2D>().moveSpeed;
@@ -48,11 +47,13 @@ public class AppearBanner : MonoBehaviour
         speedEnemySpeed = originalValue2;
         bigEnemySpeed = originalValue3;
     }
+
     void moving()
     {
         transform.position =
             Vector2.Lerp(transform.position, target, Speed);
     }
+
 
     void Update()
     {
@@ -68,14 +69,14 @@ public class AppearBanner : MonoBehaviour
         IEnumerator WaitForIt()
         {
             yield return new WaitForSeconds(4.0f);
-            target = new Vector2(1500, 382);
+            target = new Vector2(843, 1200);
             moving();
         }
 
-        if(slTimer.value > Resttime)
+        if (slTimer.value > Resttime && isSpeedUp)
         {
+            isSpeedUp = false;
             StartCoroutine(ChangeVariableForSeconds(3));
         }
-
     }
 }
