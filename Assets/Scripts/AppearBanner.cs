@@ -20,7 +20,7 @@ public class AppearBanner : MonoBehaviour
     [SerializeField] GameObject bigEnemyPrefab;
     bool isSpeedUp = true;
 
-    Vector2 target = new Vector2(843, 800);
+    Vector2 target = new Vector2(964, 905);
 
     void Start()
     {
@@ -69,7 +69,7 @@ public class AppearBanner : MonoBehaviour
         IEnumerator WaitForIt()
         {
             yield return new WaitForSeconds(4.0f);
-            target = new Vector2(843, 1200);
+            target = new Vector2(964, 1532);
             moving();
         }
 
